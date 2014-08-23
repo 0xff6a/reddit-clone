@@ -35,12 +35,10 @@ describe 'User management:' do
 
 		it 'a user must be signed in to post' do
 			visit posts_path
-			expect(page).not_to have_css 'a', text: 'Post New Text'
-			expect(page).not_to have_css 'a', text: 'Post New Link'
+			expect(page).not_to have_voting_links
 			_create_and_login_test_user
 			visit posts_path
-			expect(page).to have_css 'a', text: 'Post New Text'
-			expect(page).to have_css 'a', text: 'Post New Link'
+			expect(page).to have_voting_links
 		end
 
 	end

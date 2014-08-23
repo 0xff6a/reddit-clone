@@ -13,8 +13,7 @@ describe 'Posting:' do
 
 		it 'should have a link to add posts' do
 			visit posts_path
-			expect(page).to have_css('a', text: 'Post New Text')
-			expect(page).to have_css('a', text: 'Post New Link')
+			expect(page).to have_voting_links
 		end
 
 		it 'should allow a user to add a text post' do
