@@ -1,4 +1,5 @@
-<%= link_to 'New Post', new_post_path %>
+<%= link_to 'Post New Text', new_post_path(type: 'text') %>
+<%= link_to 'Post New Link', new_post_path(type: 'link') %>
 <% if @posts.any? %>
 	<%= render @posts %>
 <% else %>

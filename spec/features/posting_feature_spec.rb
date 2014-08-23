@@ -11,14 +11,24 @@ describe 'Posting:' do
 
 		it 'should have a link to add posts' do
 			visit posts_path
-			expect(page).to have_css('a', text: 'New Post')
+			expect(page).to have_css('a', text: 'Post New Text')
+			expect(page).to have_css('a', text: 'Post New Link')
 		end
 
 		it 'should allow a user to add a text post' do
 			visit posts_path
-			click_link 'New Post'
+			click_link 'Post New Text'
 			fill_in 'new_post_title', with: 'text post'
 			fill_in 'new_post_text', with: 'waffle waffle'
+			click_on 'Post'
+			expect(page).to have_content('Thank you for posting...')
+		end
+
+		it 'should allow a user to add a url post' do
+			visit posts_path
+			click_link 'Post New Link'
+			fill_in 'new_post_title', with: 'url post'
+			fill_in 'new_post_url', with: 'http://www.google.com'
 			click_on 'Post'
 			expect(page).to have_content('Thank you for posting...')
 		end
@@ -42,7 +52,7 @@ describe 'Posting:' do
 
 		it 'displays an error if post is not valid' do
 			visit posts_path
-			click_link 'New Post'
+			click_link 'Post New Text'
 			fill_in 'new_post_title', with: ''
 			fill_in 'new_post_text', with: 'waffle waffle'
 			click_on 'Post'

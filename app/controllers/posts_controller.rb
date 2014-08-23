@@ -5,11 +5,12 @@ class PostsController < ApplicationController
 	end
 
 	def new
+		@type = params[:type]
 		@new_post = Post.new()
 	end
 
 	def create
-		@post = Post.create(params[:post].permit(:title, :text))
+		@post = Post.create(params[:post].permit(:title, :text, :url))
 		@post.valid? ? _process_valid_post : _post_errorhandler(@post)
 	end
 

@@ -1,5 +1,9 @@
 <%= form_for @new_post do |f| %>
 	<%= f.text_field :title, id: 'new_post_title', placeholder: 'Title' %>
-	<%= f.text_field :text, id: 'new_post_text', placeholder: 'Text....' %>
+	<% if @type == 'text' %>
+		<%= f.text_field :text, id: 'new_post_text', placeholder: 'Text....' %>
+	<% else %>
+		<%= f.text_field :url, id: 'new_post_url', placeholder: 'URL' %>
+	<% end %>
 	<%= f.submit 'Post' %>
 <% end %>
