@@ -7,4 +7,9 @@
 			<%= post.text %>
 		</p>
 	</section>
+	<footer>
+		<nav class='post-nav'>
+			<%= link_to pluralize(post.comments.count, 'comment'), new_post_comment_path(post) %>
+		</nav>
+	</footer>
 </article>

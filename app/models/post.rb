@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
 
-	belongs_to :user
+	belongs_to 	:user
+	has_many 		:comments
 
 	validates :title, presence: { message:'Your post must have a title' }
 	validate :contains_text_or_url, message: 'Your post must include text or a link'

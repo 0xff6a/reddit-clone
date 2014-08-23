@@ -1,0 +1,4 @@
+<%= form_for [@post, @new_comment] do |f| %>
+	<%= f.text_field :text, id: 'new_comment_text', placeholder: 'Comments...' %>
+	<%= f.submit 'Save' %>
+<% end %>
