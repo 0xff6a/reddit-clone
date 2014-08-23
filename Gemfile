@@ -44,6 +44,7 @@ group :development, :test do
 	gem 'factory_girl_rails'
 end
 
+gem 'devise'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 

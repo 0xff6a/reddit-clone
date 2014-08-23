@@ -13,3 +13,12 @@ def _create_url_post(title, url)
 	fill_in 'new_post_url', with: url
 	click_on 'Post'
 end
+
+def _sign_up_test_user
+	visit posts_path
+	click_link 'Sign Up'
+	fill_in 'user_email', with: 'test@test.com'
+	fill_in 'user_password', with: '12345678'
+	fill_in 'user_password_confirmation', with: '12345678'
+	click_on 'Sign up'
+end
