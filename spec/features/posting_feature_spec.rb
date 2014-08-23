@@ -17,8 +17,8 @@ describe 'Posting:' do
 		it 'should allow a user to add a text post' do
 			visit posts_path
 			click_link 'New Post'
-			fill_in 'Title', with: 'text post'
-			fill_in 'Text', with: 'waffle waffle'
+			fill_in 'new_post_title', with: 'text post'
+			fill_in 'new_post_text', with: 'waffle waffle'
 			click_on 'Post'
 			expect(page).to have_content('Thank you for posting...')
 		end
