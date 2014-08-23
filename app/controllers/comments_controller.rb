@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 	def index
 		@post = Post.find(params[:post_id])
 		@new_comment = Comment.new
-		@comments = Comment.find_by(post_id: params[:post_id])
+		@comments = @post.comments
 	end
 
 	def create
