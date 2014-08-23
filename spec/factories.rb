@@ -1,8 +1,9 @@
 FactoryGirl.define do
   
   factory :test_post, class: Post do
-    title 'text post'
-    text  'waffle waffle'
+    title 	'text post'
+    text  	'waffle waffle'
+    user_id 1
   end
 
   factory :test_user, class: User do

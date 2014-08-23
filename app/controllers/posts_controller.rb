@@ -10,8 +10,14 @@ class PostsController < ApplicationController
 	end
 
 	def create
-		@post = Post.create(params[:post].permit(:title, :text, :url))
+		@post = _create_post(params[:post])
 		@post.valid? ? _process_valid_post : _post_errorhandler(@post)
+	end
+
+	def _create_post(data_hash)
+		post = Post.create(data_hash.permit(:title, :text, :url))
+		post.user_id = current_user.id
+		post
 	end
 
 	def _process_valid_post
