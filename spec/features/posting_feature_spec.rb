@@ -16,20 +16,12 @@ describe 'Posting:' do
 		end
 
 		it 'should allow a user to add a text post' do
-			visit posts_path
-			click_link 'Post New Text'
-			fill_in 'new_post_title', with: 'text post'
-			fill_in 'new_post_text', with: 'waffle waffle'
-			click_on 'Post'
+			_create_text_post('text post', 'waffle waffle')
 			expect(page).to have_content('Thank you for posting...')
 		end
 
 		it 'should allow a user to add a url post' do
-			visit posts_path
-			click_link 'Post New Link'
-			fill_in 'new_post_title', with: 'url post'
-			fill_in 'new_post_url', with: 'http://www.google.com'
-			click_on 'Post'
+			_create_url_post('url post', 'http://www.google.com')
 			expect(page).to have_content('Thank you for posting...')
 		end
 	
@@ -51,11 +43,7 @@ describe 'Posting:' do
 	context 'ensuring valid posts' do
 
 		it 'displays an error if post is not valid' do
-			visit posts_path
-			click_link 'Post New Text'
-			fill_in 'new_post_title', with: ''
-			fill_in 'new_post_text', with: 'waffle waffle'
-			click_on 'Post'
+			_create_text_post('', 'waffle waffle')
 			expect(page).to have_content('Your post must have a title')
 			expect(page).not_to have_content('waffle waffle')
 		end
