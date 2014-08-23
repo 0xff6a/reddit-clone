@@ -2,6 +2,8 @@ require 'rails_helper'
 
 describe 'Posting:' do 	
 
+	before(:each) { _create_and_login_test_user }
+
 	context 'when there are no posts' do
 
 		it 'should display a message' do

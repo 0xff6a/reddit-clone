@@ -30,3 +30,8 @@ def _sign_in_test_user
 	fill_in 'user_password', with: '12345678'
 	click_on 'Sign in'
 end
+
+def _sign_out
+	visit posts_path
+	click_link 'Sign Out'
+end

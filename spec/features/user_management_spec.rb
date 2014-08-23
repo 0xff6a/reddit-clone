@@ -23,7 +23,7 @@ describe 'User management:' do
 
 		before(:each) { _create_and_login_test_user }
 
-		xit 'a user can sign out' do
+		it 'a user can sign out' do
 			_sign_out
 			expect(page).to have_content('Signed out successfully')
 			expect(page).not_to have_content('test@test.com')
@@ -33,12 +33,14 @@ describe 'User management:' do
 
 	context 'content access rights' do
 
-		xit 'a user must be signed in to post' do
+		it 'a user must be signed in to post' do
 			visit posts_path
-			expect(page).not_to have_css 'a', text: 'New Post'
+			expect(page).not_to have_css 'a', text: 'Post New Text'
+			expect(page).not_to have_css 'a', text: 'Post New Link'
 			_create_and_login_test_user
 			visit posts_path
-			expect(page).to have_css 'a', text: 'New Post'
+			expect(page).to have_css 'a', text: 'Post New Text'
+			expect(page).to have_css 'a', text: 'Post New Link'
 		end
 
 	end
