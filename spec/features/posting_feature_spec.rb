@@ -27,7 +27,7 @@ describe 'Posting:' do
 
 	context 'when there are posts' do
 
-		before(:each) { Post.create(title: 'text post', text: 'waffle waffle')}
+		before(:each) { create(:test_post) }
 
 		it 'should display them on the homepage' do
 			visit posts_path
@@ -49,7 +49,7 @@ describe 'Posting:' do
 			expect(page).to have_content('Your post must have a title')
 			expect(page).not_to have_content('waffle waffle')
 		end
-		
+
 	end	
 
 end
