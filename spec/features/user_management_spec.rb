@@ -33,7 +33,25 @@ describe 'User management:' do
 
 	context 'content access rights' do
 
+		before(:each) { create(:test_post) }
+
 		it 'a user must be signed in to post' do
+			visit posts_path
+			expect(page).not_to have_posting_links
+			_create_and_login_test_user
+			visit posts_path
+			expect(page).to have_posting_links
+		end
+
+		it 'a user must be signed in to comment' do
+			visit posts_path
+			expect(page).not_to have_commenting_links
+			_create_and_login_test_user
+			visit posts_path
+			expect(page).to have_commenting_links
+		end
+
+		it 'a user must be signed in to vote' do
 			visit posts_path
 			expect(page).not_to have_voting_links
 			_create_and_login_test_user

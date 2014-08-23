@@ -3,7 +3,9 @@
 		<%= post.title %>
 	</header>
 	<nav class='post-voting'>
-		<%= link_to '▲', post_votes_path(post, value: '1'), id:"#{post.id}-vote", method: :post %>
+		<% if current_user %>
+			<%= link_to '▲', post_votes_path(post, value: '1'), id:"#{post.id}-vote", class: 'votes-link', method: :post %>
+		<% end %>
 		<var><%= post.votes.count %></var>
 	</nav>
 	<section class='post-body'>
@@ -13,7 +15,9 @@
 	</section>
 	<footer>
 		<nav class='post-nav'>
-			<%= link_to pluralize(post.comments.count, 'comment'), post_comments_path(post), class: 'comments-link' %>
+			<% if current_user %>
+				<%= link_to pluralize(post.comments.count, 'comment'), post_comments_path(post), class: 'comments-link' %>
+			<% end %>
 		</nav>
 	</footer>
 </article>

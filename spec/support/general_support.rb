@@ -3,6 +3,14 @@ def _create_and_login_test_user
 	login_as user
 end
 
-def have_voting_links
+def have_posting_links
 	have_css('a', text: 'Post New Text') && have_css('a', text: 'Post New Link')
+end
+
+def have_commenting_links
+	have_css('.comments-link')
+end
+
+def have_voting_links
+	have_css('.votes-link')
 end
