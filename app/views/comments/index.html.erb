@@ -1,0 +1,13 @@
+<article class='comments-container container'>
+	<section>
+		<%= render @post %>
+	</section>
+	<section class='comment-input'>
+		<%= render partial: 'form' %>
+	</section>
+	<section class='comments-list'>
+		<% if @comments %>
+			<%= render @comments %>
+		<% end %>
+	</section>
+</article>

@@ -12,4 +12,9 @@ FactoryGirl.define do
     password_confirmation '12345678'
   end
 
+  factory :test_comment, class: Comment do
+  	text 			'Agreed'
+  	post_id 	1
+  end
+
 end

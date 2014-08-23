@@ -43,6 +43,7 @@ group :development, :test do
 	gem 'capybara'
 	gem 'factory_girl_rails'
 	gem 'warden'
+	gem 'launchy'
 end
 
 gem 'devise'

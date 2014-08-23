@@ -2,11 +2,12 @@ require 'rails_helper'
 
 describe 'Comments:' do
 
-	before(:each) { create(:test_post) }
-	
-	context 'when a user is logged in' do
-
-		before(:each) { _create_and_login_test_user }
+	before(:each) do 
+		_create_and_login_test_user
+		@post = create(:test_post)
+	end
+			
+	context 'when there are no comments' do
 
 		it 'they can comment on a post' do
 			visit posts_path
@@ -26,6 +27,19 @@ describe 'Comments:' do
 			expect(page).to have_css('a', text: '0 comments')
 		end
 	
+	end
+
+	context 'when there are comments' do
+
+		before(:each) { create(:test_comment, text: 'Agreed', post_id: @post.id)}
+
+		it 'they are displayed when the user visits the comments page for a post' do
+			visit posts_path
+			click_link '1 comment'
+			expect(page).to have_content(@post.text)
+			expect(page).to have_content('Agreed')
+		end	
+
 	end
 
 end

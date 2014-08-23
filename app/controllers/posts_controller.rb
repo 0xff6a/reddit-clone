@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 
 	def create
 		@post = _create_post(params[:post])
-		@post.valid? ? _process_valid_post : _post_errorhandler(@post)
+		@post.save ? _process_valid_post : _post_errorhandler(@post)
 	end
 
 	def _create_post(data_hash)
