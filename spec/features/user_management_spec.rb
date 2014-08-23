@@ -10,8 +10,8 @@ describe 'User management:' do
 			expect(page).to have_content('test@test.com')
 		end
 
-		xit 'a user can sign in' do
-			_create_test_user_object
+		it 'a user can sign in' do
+			create(:test_user)
 			_sign_in_test_user
 			expect(page).to have_content('Signed in successfully')
 			expect(page).to have_content('test@test.com')

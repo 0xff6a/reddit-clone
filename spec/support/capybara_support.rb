@@ -22,3 +22,11 @@ def _sign_up_test_user
 	fill_in 'user_password_confirmation', with: '12345678'
 	click_on 'Sign up'
 end
+
+def _sign_in_test_user
+	visit posts_path
+	click_link 'Sign In'
+	fill_in 'user_email', with: 'test@test.com'
+	fill_in 'user_password', with: '12345678'
+	click_on 'Sign in'
+end
