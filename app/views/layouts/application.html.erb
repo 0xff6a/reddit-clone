@@ -7,8 +7,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<header>
+		<%= render partial: 'layouts/flash' %>
+	</header>
+	<main class='container'>
+		
+		<%= yield %>
 
-<%= yield %>
- <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	</main>
 </body>
 </html>

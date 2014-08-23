@@ -31,10 +31,8 @@ describe 'Posting:' do
 
 		it 'should display them on the homepage' do
 			visit posts_path
-			within('#post-body') do
-				expect(page).to have_content('text post')
-				expect(page).to have_content('waffle waffle')
-			end 
+			within('.post-header') { expect(page).to have_content('text post') }
+			within('.post-body') { expect(page).to have_content('waffle waffle') }
 		end
 
 	end
