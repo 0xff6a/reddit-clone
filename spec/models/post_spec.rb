@@ -18,6 +18,12 @@ RSpec.describe Post, :type => :model do
 			expect(post.errors.messages[:text]).to include('Your post must include text or a link')
 		end
 
+		it 'if given a url must be in valid format' do
+			post = Post.create(title: 'Test', url: 'not a url', user_id: user.id)
+			expect(post).not_to be_valid
+			expect(post.errors.messages[:url]).to include('Not a valid url format')
+		end
+
 		it 'must belong to a user' do
 			post = Post.create(title: 'Test', text: 'waffle waffle')
 			expect(post).not_to be_valid
