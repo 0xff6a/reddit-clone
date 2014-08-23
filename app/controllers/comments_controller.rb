@@ -14,6 +14,7 @@ class CommentsController < ApplicationController
 	def _create_comment(data_hash, post_id)
 		comment = Comment.create(data_hash.permit(:text))
 		comment.post_id = post_id
+		comment.user_id = current_user.id
 		comment
 	end
 

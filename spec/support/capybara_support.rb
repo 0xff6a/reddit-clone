@@ -35,3 +35,10 @@ def _sign_out
 	visit posts_path
 	click_link 'Sign Out'
 end
+
+def _add_a_comment_to_none(text)
+	visit posts_path
+	click_link '0 comments'
+	fill_in 'new_comment_text', with: text
+	click_on 'Save'
+end
