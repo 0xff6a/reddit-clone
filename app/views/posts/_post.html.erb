@@ -2,6 +2,10 @@
 	<header class='post-header'>
 		<%= post.title %>
 	</header>
+	<nav class='post-voting'>
+		<%= link_to '▲', post_votes_path(post, value: '1'), id:"#{post.id}-vote", method: :post %>
+		<var><%= post.votes.count %></var>
+	</nav>
 	<section class='post-body'>
 		<p class='post-text'>
 			<%= post.text %>

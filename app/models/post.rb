@@ -2,11 +2,12 @@ class Post < ActiveRecord::Base
 
 	belongs_to 	:user
 	has_many 		:comments
+	has_many 		:votes
 
-	validates 						:title, presence: { message:'Your post must have a title' }
-	validate 							:contains_text_or_url, message: 'Your post must include text or a link'
-	validates 						:user_id, presence: { message:'You must be signed in to post' }
-	validate							:url_format_if_present, message: 'Not a valid url format'
+	validates 	:title, presence: { message:'Your post must have a title' }
+	validate 		:contains_text_or_url, message: 'Your post must include text or a link'
+	validates 	:user_id, presence: { message:'You must be signed in to post' }
+	validate		:url_format_if_present, message: 'Not a valid url format'
 
 
 	def contains_text_or_url

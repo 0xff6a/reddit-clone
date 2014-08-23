@@ -30,8 +30,13 @@ RSpec.describe Post, :type => :model do
 			expect(post.errors.messages[:user_id]).to include('You must be signed in to post')
 		end
 
-		it 'is valid with a title, user and text or url' do
+		it 'should be valid with a title, user and text' do
 			post = Post.create(title: 'Test', text: 'waffle waffle', user_id: user.id)
+			expect(post).to be_valid
+		end
+
+		it 'should be valid with a title, user and valid url' do
+			post = Post.create(title: 'Test', url:'http://google.com', user_id: user.id)
 			expect(post).to be_valid
 		end
 
