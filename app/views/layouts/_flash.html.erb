@@ -4,4 +4,11 @@
 			<strong><%= flash[:notice] %></strong>
 		</h4>
 	<% end %>
+	<% if flash[:errors] %>
+		<% flash[:errors].each do |error| %>
+			<h4 class="alert alert-danger" role="alert">
+				<strong><%= error.flatten[1] %></strong>
+			</h4>
+		<% end %>
+	<% end %>
 </section>

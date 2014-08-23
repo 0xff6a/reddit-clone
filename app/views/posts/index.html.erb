@@ -1,6 +1,6 @@
+<%= link_to 'New Post', new_post_path %>
 <% if @posts.any? %>
 	<%= render @posts %>
+<% else %>
+	<h3 class='no-post-msg'>No posts yet</h3>
 <% end %>
-
-<h3 class='no-post-msg'>No posts yet</h3>
-<%= link_to 'New Post', new_post_path %>
