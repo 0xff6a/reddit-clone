@@ -4,7 +4,8 @@
 	</header>
 	<nav class='post-voting'>
 		<% if current_user %>
-			<%= link_to '▲', post_votes_path(post, value: '1'), id:"#{post.id}-vote", class: 'up-vote-link' %>
+			<%= link_to '▲', post_votes_path(post, value: '1'), id:"#{post.id}-up-vote", class: 'up-vote-link' %>
+			<%= link_to '▼', post_votes_path(post, value: '-1'), id:"#{post.id}-down-vote", class: 'down-vote-link' %>
 		<% end %>
 		<var class='vote-count'><%= post.votes.count %></var>
 	</nav>

@@ -18,4 +18,16 @@ FactoryGirl.define do
     user_id   1
   end
 
+  factory :up_vote, class: Vote do
+    value   1
+    post_id 1
+    user_id 1
+  end
+
+  factory :down_vote, class: Vote do
+    value   -1
+    post_id 1
+    user_id 1
+  end
+
 end
