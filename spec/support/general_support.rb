@@ -16,7 +16,7 @@ def have_commenting_links
 end
 
 def have_voting_links
-	have_css('.votes-link')
+	have_css('.up-vote-link')
 end
 
 def must_be_signed_in_to?(have_privilege)

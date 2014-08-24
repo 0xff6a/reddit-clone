@@ -4,9 +4,9 @@
 	</header>
 	<nav class='post-voting'>
 		<% if current_user %>
-			<%= link_to '▲', post_votes_path(post, value: '1'), id:"#{post.id}-vote", class: 'votes-link', method: :post %>
+			<%= link_to '▲', post_votes_path(post, value: '1'), id:"#{post.id}-vote", class: 'up-vote-link' %>
 		<% end %>
-		<var><%= post.votes.count %></var>
+		<var class='vote-count'><%= post.votes.count %></var>
 	</nav>
 	<section class='post-body'>
 		<p class='post-text'>
