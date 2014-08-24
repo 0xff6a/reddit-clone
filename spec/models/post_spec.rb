@@ -42,4 +42,32 @@ RSpec.describe Post, :type => :model do
 
 	end
 
+	context '#vote-total' do
+
+		let(:post) { Post.create(title: 'Test', text: 'waffle', user_id: user.id) }
+
+		it 'should return 1 if the post has 1 upvote' do
+			post.votes.create(value: 1, user_id: user.id)
+			expect(post.vote_total).to eq(1)
+		end
+
+		it 'should return 0 if the post has 1 downvote' do
+			post.votes.create(value: -1, user_id: user.id)
+			expect(post.vote_total).to eq(0)
+		end
+
+		it 'should return 0 if the post has 1 upvote and 1 downvote' do
+			post.votes.create(value: 1, user_id: user.id)
+			post.votes.create(value: -1, user_id: user.id)
+			expect(post.vote_total).to eq(0)
+		end
+
+		it 'should return 1 if the post has 2 upvotes and 1 downvote' do
+			2.times { post.votes.create(value: 1, user_id: user.id) }
+			post.votes.create(value: -1, user_id: user.id)
+			expect(post.vote_total).to eq(1)
+		end
+
+	end
+
 end

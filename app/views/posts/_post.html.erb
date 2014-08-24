@@ -1,4 +1,4 @@
-<article class='post-container container'>
+<article class='post-container container', id='post-<%= post.id %>'>
 	<header class='post-header'>
 		<%= post.title %>
 	</header>
@@ -7,7 +7,7 @@
 			<%= link_to '▲', post_votes_path(post, value: '1'), id:"#{post.id}-up-vote", class: 'up-vote-link' %>
 			<%= link_to '▼', post_votes_path(post, value: '-1'), id:"#{post.id}-down-vote", class: 'down-vote-link' %>
 		<% end %>
-		<var class='vote-count'><%= post.votes.count %></var>
+		<var class='vote-count'><%= post.vote_total %></var>
 	</nav>
 	<section class='post-body'>
 		<p class='post-text'>

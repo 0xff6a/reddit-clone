@@ -14,24 +14,21 @@ describe 'Voting:' do
 	context 'when there are posts', js: true do
 
 		it 'a user can vote a post up' do
-			visit root_path
-			link_id = "#{other_post.id}-up-vote"
-			click_link link_id
+			vote_for(post, 'up')
 			expect(page).to have_css('.vote-count', text: '1')
 		end
 
 		it 'a user can vote a post down' do
-			create(:up_vote, post_id: other_post.id)
-			visit root_path
-			link_id = "#{other_post.id}-down-vote"
-			click_link link_id
+			create(:up_vote, post_id: post.id)
+			vote_for(post, 'down')
 			expect(page).to have_css('.vote-count', text: '0')
 		end
 
-		xit 'they are ranked by their vote count' do
-
+		it 'they are ranked by their vote count' do
+			create(:up_vote, post_id: other_post.id)
+			visit posts_path
+			expect(other_post.title).to appear_before post.title
 		end
-
 
 	end
 

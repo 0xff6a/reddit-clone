@@ -9,6 +9,11 @@ class Post < ActiveRecord::Base
 	validates 	:user_id, presence: { message:'You must be signed in to post' }
 	validate		:url_format_if_present, message: 'Not a valid url format'
 
+	def vote_total
+		[0, _post.votes.sum(:value)].max
+	end
+
+	private
 
 	def contains_text_or_url
 		unless url.present? || text.present? 
@@ -21,6 +26,10 @@ class Post < ActiveRecord::Base
 		if url.present?
 			errors.add(:url, 'Not a valid url format') unless url =~ URI::regexp
 		end
+	end
+
+	def _post
+		self
 	end
 
 end

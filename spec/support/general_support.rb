@@ -26,3 +26,9 @@ def must_be_signed_in_to?(have_privilege)
 	visit posts_path
 	expect(page).to have_privilege
 end
+
+def vote_for(post, up_or_down)
+	visit root_path
+	link_id = "#{post.id}-#{up_or_down}-vote"
+	click_link link_id
+end

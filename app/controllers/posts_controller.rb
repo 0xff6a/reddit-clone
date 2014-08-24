@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
 	def index
-		@posts = Post.all
+		@posts = Post.all.sort_by(&:vote_total).reverse
 	end
 
 	def new
