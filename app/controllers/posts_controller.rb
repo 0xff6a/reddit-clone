@@ -1,7 +1,12 @@
 class PostsController < ApplicationController
 
 	def index
-		@posts = Post.ranked_posts
+		@posts = Post.ranked_by_algorithm(:default)
+	end
+
+	def fresh
+		@posts = Post.ranked_by_algorithm(:fresh)
+		render 'index'
 	end
 
 	def new

@@ -14,11 +14,30 @@ class Post < ActiveRecord::Base
 	end
 
 	def rank
-		Post.ranked_posts.index(_post) + 1
+		Post.ranked_by_algorithm(:default).index(_post) + 1
 	end
 
-	def self.ranked_posts
+	# def self.ranked_posts
+	# 	self.all.sort_by(&:vote_total).reverse
+	# end
+
+	def self.ranked_by_algorithm(algorithm)
+		case algorithm
+		when :default
+			self.default_ranking
+		when :fresh
+			self.fresh_ranking
+		else
+			self.all
+		end
+	end
+
+	def self.default_ranking
 		self.all.sort_by(&:vote_total).reverse
+	end
+
+	def self.fresh_ranking
+		self.all.sort_by(&:created_at).reverse
 	end
 
 	def descendants_count
