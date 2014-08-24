@@ -1,3 +1,40 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.panel-footer {
+	line-height: 0.5;
+	background-color: white !important;
+}
+
+.post-body {
+	width: 85%;
+	margin-left: 15%;
+}
+
+.post-rank {
+	float: left;
+	display: inline-block;
+}
+
+.post-voting {
+
+	display: inline-block;
+
+	a {
+		display: flex;
+	}
+}
+
+.well {
+	background-colour: white;
+	margin-bottom: 0px !important;
+}
+
+.post-metadata {
+	float: right;
+}
+
+
+
+

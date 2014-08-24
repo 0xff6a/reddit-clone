@@ -35,7 +35,7 @@ describe 'Posting:' do
 		it 'should display them on the homepage' do
 			visit posts_path
 			expect(page).not_to have_content('No posts yet')
-			within('.post-header') { expect(page).to have_content('text post') }
+			within('.panel-heading') { expect(page).to have_content('text post') }
 			within('.post-body') { expect(page).to have_content('waffle waffle') }
 		end
 

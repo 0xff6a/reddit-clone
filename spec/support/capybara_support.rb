@@ -3,7 +3,7 @@ def _create_text_post(title, text)
 	click_link 'Post New Text'
 	fill_in 'new_post_title', with: title
 	fill_in 'new_post_text', with: text
-	click_on 'Post'
+	within('#new_post'){ click_button 'Post' }
 end
 
 def _create_url_post(title, url)
@@ -11,7 +11,7 @@ def _create_url_post(title, url)
 	click_link 'Post New Link'
 	fill_in 'new_post_title', with: title
 	fill_in 'new_post_url', with: url
-	click_on 'Post'
+	within('#new_post'){ click_button 'Post' }
 end
 
 def _sign_up_test_user

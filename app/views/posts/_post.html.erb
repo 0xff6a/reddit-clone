@@ -1,26 +1,21 @@
-<article class='post-container container', id='post-<%= post.id %>'>
-	<var class='rank'><%= post.rank(:default) %></var>
-	<nav class='post-voting'>
-		<% if current_user %>
-			<%= link_to '▲', post_votes_path(post, value: '1'), id:"#{post.id}-up-vote", class: 'up-vote-link' %>
-			<var class='vote-count'><%= post.vote_total %></var>
-			<%= link_to '▼', post_votes_path(post, value: '-1'), id:"#{post.id}-down-vote", class: 'down-vote-link' %>
-		<% else %>
-			<span>▲</span>
-			<var class='vote-count'><%= post.vote_total %></var>
-			<span>▼</span>
-		<% end %>
-	</nav>
-	<header class='post-header'>
-		<%= post.title %>
+<article class="panel panel-info", id='post-<%= post.id %>'>
+	<header class="panel-heading">
+		<strong><%= post.title %></strong>
+			<em class='post-metadata'>Posted by <%= post_owner(post) %> <%=time_ago_in_words(post.created_at)%> ago</em>
 	</header>
-	<section class='post-body'>
-		<p class='post-text'>
-			<%= post.text %>
-		</p>
+	<aside class='post-rank'>	
+		<var class='rank'><%= post.rank(:default) %></var>
+		<nav class='post-voting'>
+			<%= render partial:'posts/post_voting', locals: { post: post } %>
+		</nav>
+	</aside>
+	<section class="panel-body post-body">
+		<div class="well well-sm">
+			<p class='post-text'><%= post.text %></p>
+	</div>
 	</section>
-	<footer>
-		<nav class='post-nav'>
+	<footer class="panel-footer">
+		<nav>
 			<%= link_to pluralize(post.descendants_count, 'comment'), post_comments_path(post), class: 'comments-link' %>
 		</nav>
 	</footer>
