@@ -31,6 +31,13 @@ RSpec.describe Vote, :type => :model do
 			expect(vote.errors.messages[:post_id]).to include('A vote must be assigned to a post')
 		end
 
+		it 'a user can only have 1 vote per post' do
+			post.votes.create(value: 1, user_id: user.id)
+			vote = post.votes.create(value: 1, user_id: user.id)
+			expect(vote).not_to be_valid
+			expect(vote.errors.messages[:user_id]).to include('You can only vote on a post once')
+		end
+
 		it 'should be valid with a value of +/-1, a post and a user' do
 			vote = Vote.create(value: 1, user_id: user.id, post_id: post.id)
 			expect(vote).to be_valid
