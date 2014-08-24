@@ -42,3 +42,11 @@ def _add_a_comment_to_none(text)
 	fill_in 'new_comment_text', with: text
 	click_on 'Save'
 end
+
+def _reply_to_comment_with(text)
+	visit posts_path
+	click_link '1 comment'
+	click_link 'Reply'
+	fill_in 'new_reply_text', with: text
+	click_on 'Save'
+end

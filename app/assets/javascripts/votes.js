@@ -10,9 +10,9 @@ $(document).ready( function(){
 		processVoteEvent(this.href, $(this).siblings('.vote-count'));
 	});
 
-	function processVoteEvent(post_url, voteCount) {
+	function processVoteEvent(url, voteCount) {
 		
-		$.post(post_url, function(response){
+		$.post(url, function(response){
 			if( response.new_vote_count === 'error'){
 				location.reload();
 			} else {

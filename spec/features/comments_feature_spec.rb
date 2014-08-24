@@ -36,6 +36,11 @@ describe 'Comments:' do
 			expect(page).to have_content('Agreed')
 		end	
 
+		it 'a user should be able to reply to a comment on the comments page' do
+			_reply_to_comment_with('Ditto')
+			expect(page).to have_content('Ditto')
+		end
+
 	end
 
 end
