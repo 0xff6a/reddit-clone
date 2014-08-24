@@ -30,6 +30,13 @@ describe 'Voting:' do
 			expect(other_post.title).to appear_before post.title
 		end
 
+		it 'their rank is displayed next to the post' do
+			create(:up_vote, post_id: other_post.id)
+			visit posts_path
+			within("#post-#{post.id}") { expect(page).to have_css('var.rank', text: '1')}
+			within("#post-#{other_post.id}") { expect(page).to have_css('var.rank', text: '2')}
+		end
+
 	end
 
 end

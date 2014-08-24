@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Post, :type => :model do
 
 	let(:user) { create(:test_user) }
+	let(:sample_post) { Post.create(title: 'Test', text: 'waffle', user_id: user.id) }
 
 	context 'validations' do
 
@@ -44,28 +45,46 @@ RSpec.describe Post, :type => :model do
 
 	context '#vote-total' do
 
-		let(:post) { Post.create(title: 'Test', text: 'waffle', user_id: user.id) }
-
 		it 'should return 1 if the post has 1 upvote' do
-			post.votes.create(value: 1, user_id: user.id)
-			expect(post.vote_total).to eq(1)
+			sample_post.votes.create(value: 1, user_id: user.id)
+			expect(sample_post.vote_total).to eq(1)
 		end
 
 		it 'should return 0 if the post has 1 downvote' do
-			post.votes.create(value: -1, user_id: user.id)
-			expect(post.vote_total).to eq(0)
+			sample_post.votes.create(value: -1, user_id: user.id)
+			expect(sample_post.vote_total).to eq(0)
 		end
 
 		it 'should return 0 if the post has 1 upvote and 1 downvote' do
-			post.votes.create(value: 1, user_id: user.id)
-			post.votes.create(value: -1, user_id: user.id)
-			expect(post.vote_total).to eq(0)
+			sample_post.votes.create(value: 1, user_id: user.id)
+			sample_post.votes.create(value: -1, user_id: user.id)
+			expect(sample_post.vote_total).to eq(0)
 		end
 
 		it 'should return 1 if the post has 2 upvotes and 1 downvote' do
-			2.times { post.votes.create(value: 1, user_id: user.id) }
-			post.votes.create(value: -1, user_id: user.id)
-			expect(post.vote_total).to eq(1)
+			2.times { sample_post.votes.create(value: 1, user_id: user.id) }
+			sample_post.votes.create(value: -1, user_id: user.id)
+			expect(sample_post.vote_total).to eq(1)
+		end
+
+	end
+
+	context '#rank' do
+
+		it 'should return 1 if there are no other posts' do
+			expect(sample_post.rank).to eq(1)
+		end
+
+		it 'should return 2 if post has lower vote-total than the other post' do
+			better_post = Post.create(title: 'Best', text: '....', user_id: user.id)
+			better_post.votes.create(value: 1, user_id: user.id)
+			expect(sample_post.rank).to eq(2)
+		end
+
+		it 'should return 1 if post has higher vote-total than the other post' do
+			worse_post = Post.create(title: 'Worse', text: '....', user_id: user.id)
+			sample_post.votes.create(value: 1, user_id: user.id)
+			expect(sample_post.rank).to eq(1)
 		end
 
 	end

@@ -10,7 +10,11 @@ class Post < ActiveRecord::Base
 	validate		:url_format_if_present, message: 'Not a valid url format'
 
 	def vote_total
-		[0, _post.votes.sum(:value)].max
+		[_post.votes.sum(:value), 0].max
+	end
+
+	def rank
+		Post.all.sort_by(&:vote_total).reverse.index(_post) + 1
 	end
 
 	private
