@@ -41,6 +41,11 @@ describe 'Comments:' do
 			expect(page).to have_content('Ditto')
 		end
 
+		it 'a user cannot reply with a blank comment' do
+			_reply_to_comment_with('')
+			expect(page).to have_content('Your comment must have text')
+		end
+
 	end
 
 end
