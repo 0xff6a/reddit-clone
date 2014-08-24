@@ -89,4 +89,23 @@ RSpec.describe Post, :type => :model do
 
 	end
 
+	context '#descendants_count' do
+
+		it 'should return 0 when there are no comments on a post' do
+			expect(sample_post.descendants_count).to eq(0)
+		end
+
+		it 'should return 1 when there is one comment on a post' do
+			comment = Comment.create(text: 'comment', user_id: user.id, post_id: sample_post.id)
+			expect(sample_post.descendants_count).to eq(1)
+		end
+
+		it 'should return 2 when there is 1 reply to 1 comment' do
+			comment = Comment.create(text: 'comment', user_id: user.id, post_id: sample_post.id)
+			reply = Comment.create(text: 'reply', user_id: user.id, parent_id: comment.id)
+			expect(sample_post.descendants_count).to eq(2)
+		end
+
+	end
+
 end

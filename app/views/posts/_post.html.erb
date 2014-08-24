@@ -22,7 +22,7 @@
 	<footer>
 		<nav class='post-nav'>
 			<% if current_user %>
-				<%= link_to pluralize(post.comments.count, 'comment'), post_comments_path(post), class: 'comments-link' %>
+				<%= link_to pluralize(post.descendants_count, 'comment'), post_comments_path(post), class: 'comments-link' %>
 			<% end %>
 		</nav>
 	</footer>

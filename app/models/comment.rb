@@ -8,13 +8,19 @@ class Comment < ActiveRecord::Base
 	validates 	:text, 		presence: { message: 'Your comment must have text'			}
 	validate    :has_parent_post_or_comment
 
+	before_save :set_parent_post_id
+
 	def replies
 		Comment.where(parent_id: _comment.id)
 	end
 
-	def parent_post_id
+	def find_parent_post_id
 		return post_id if post_id.present?
 		Comment.find(parent_id).parent_post_id
+	end
+
+	def self.count_if_parent_id(search_id)
+		Comment.where(parent_post_id: search_id).count
 	end
 
 	private
@@ -40,5 +46,11 @@ class Comment < ActiveRecord::Base
 	def _comment
 		self
 	end
+
+	protected
+
+	def set_parent_post_id
+    self.parent_post_id = self.find_parent_post_id
+  end
 
 end

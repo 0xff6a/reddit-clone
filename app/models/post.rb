@@ -21,6 +21,10 @@ class Post < ActiveRecord::Base
 		self.all.sort_by(&:vote_total).reverse
 	end
 
+	def descendants_count
+		Comment.count_if_parent_id(_post.id)
+	end
+
 	private
 
 	def contains_text_or_url
