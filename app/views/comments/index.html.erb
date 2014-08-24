@@ -3,7 +3,9 @@
 		<%= render @post %>
 	</section>
 	<section class='comment-input'>
-		<%= render partial: 'form' %>
+		<% if current_user %>
+			<%= render partial: 'form' %>
+		<% end %>
 	</section>
 	<section class='comments-list'>
 		<% if @comments %>

@@ -21,9 +21,7 @@
 	</section>
 	<footer>
 		<nav class='post-nav'>
-			<% if current_user %>
-				<%= link_to pluralize(post.descendants_count, 'comment'), post_comments_path(post), class: 'comments-link' %>
-			<% end %>
+			<%= link_to pluralize(post.descendants_count, 'comment'), post_comments_path(post), class: 'comments-link' %>
 		</nav>
 	</footer>
 </article>

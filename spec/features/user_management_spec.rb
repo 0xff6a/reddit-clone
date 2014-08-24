@@ -36,15 +36,15 @@ describe 'User management:' do
 		before(:each) { create(:test_post) }
 
 		it 'a user must be signed in to post' do
-			must_be_signed_in_to?(have_posting_links)
+			must_be_signed_in_to?(have_posting_links, posts_path)
 		end
 
 		it 'a user must be signed in to comment' do
-			must_be_signed_in_to?(have_commenting_links)
+			must_be_signed_in_to?(have_commenting_form, post_comments_path(Post.first))
 		end
 
 		it 'a user must be signed in to vote' do
-			must_be_signed_in_to?(have_voting_links)
+			must_be_signed_in_to?(have_voting_links, posts_path)
 		end
 
 	end
