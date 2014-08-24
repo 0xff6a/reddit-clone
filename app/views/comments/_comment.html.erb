@@ -15,7 +15,7 @@
 </article>
 <article class='reply-container container'>
 	<% if comment.replies.any? %>
-		<span class='child-delimiter'>-----</span>
+		<span class='child-delimiter'>↪</span>
 		<% comment.replies.each do |comment| %>
 			<%= render comment %>
 		<% end %> 

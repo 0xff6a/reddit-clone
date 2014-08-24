@@ -1,8 +1,3 @@
-def _create_and_login_test_user
-	user = create(:test_user)
-	login_as user
-end
-
 def have_welcome_message
 	have_content('Welcome test@test.com')
 end

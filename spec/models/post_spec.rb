@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Post, :type => :model do
 
-	let(:user) { create(:test_user) }
-	let(:sample_post) { Post.create(title: 'Test', text: 'waffle', user_id: user.id) }
+	let(:user) 				{ create(:test_user) 																						}
+	let(:sample_post) { Post.create(title: 'Test', text: 'waffle', user_id: user.id) 	}
 
 	context 'validations' do
 
