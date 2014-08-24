@@ -19,12 +19,12 @@ class RepliesController < ApplicationController
 	end
 
 	def _process_valid_reply(parent)
-		redirect_to post_comments_path(parent.post_id)
+		redirect_to post_comments_path(parent.parent_post_id)
 	end
 
 	def _reply_errorhandler(reply, parent)
 		flash[:errors] = reply.errors.messages
-		redirect_to post_comments_path(parent.post_id)
+		redirect_to post_comments_path(parent.parent_post_id)
 	end
 
 end
