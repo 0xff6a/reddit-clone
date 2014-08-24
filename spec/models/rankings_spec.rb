@@ -23,6 +23,12 @@ describe 'Ranking Posts' do
 				expect(sample_post.rank(:default)).to eq(1)
 			end
 
+			it 'should return 1 if the post has a lower vote total, but is much newer' do
+				old_post = Post.create(created_at: 2.days.ago, title: 'Old', text: '....', user_id: user.id)
+				10.times { |n| old_post.votes.create(value: 1, user_id: n) }
+				expect(sample_post.rank(:default)).to eq(1)
+			end
+
 		end
 
 		context 'fresh algorithm' do
@@ -42,6 +48,12 @@ describe 'Ranking Posts' do
 				10.times { |n| old_post.votes.create(value: 1, user_id: n) }
 				expect(sample_post.rank(:fresh)).to eq(1)
 			end
+
+		end
+
+		context 'controversial algorithm' do
+
+
 
 		end
 
