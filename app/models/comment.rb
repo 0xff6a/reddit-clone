@@ -12,6 +12,11 @@ class Comment < ActiveRecord::Base
 		Comment.where(parent_id: _comment.id)
 	end
 
+	def parent_post_id
+		return post_id if post_id.present?
+		Comment.find(parent_id).parent_post_id
+	end
+
 	private
 
 	def has_parent_post_or_comment

@@ -47,13 +47,35 @@ RSpec.describe Comment, :type => :model do
 	
 	end
 
-	context 'replies' do
+	context 'replying to another comment' do
 
-		it 'can be linked to another comment' do
-			reply = Comment.create(text: 'reply', user_id: user.id, parent_id: new_comment.id)
-			expect(new_comment.replies).to include(reply)
+		let(:reply) { reply = Comment.create(text: 'reply', user_id: user.id, parent_id: new_comment.id) }
+
+		context '#replies' do
+			
+			it 'can be linked to another comment' do
+				expect(new_comment.replies).to include(reply)
+			end
+
 		end
+
+		context '#parent_post_id' do
 		
+			it 'should return parent_id if it is present' do
+				expect(new_comment.parent_post_id).to eq new_comment.post_id
+			end
+
+			it 'it should return the post_id of its parent if it does not have one' do
+				expect(reply.parent_post_id).to eq new_comment.post_id
+			end
+
+			it 'it should return the post it is originally descended from' do
+				re_reply = Comment.create(text: 'reply reply', user_id: user.id, parent_id: reply.id)
+				expect(re_reply.parent_post_id).to eq new_comment.post_id
+			end
+
+		end
+
 	end
 
 end
