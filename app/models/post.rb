@@ -13,8 +13,8 @@ class Post < ActiveRecord::Base
 		[_post.votes.sum(:value), 0].max
 	end
 
-	def rank
-		Post.ranked_by_algorithm(:default).index(_post) + 1
+	def rank(algorithm)
+		Post.ranked_by_algorithm(algorithm).index(_post) + 1
 	end
 
 	# def self.ranked_posts

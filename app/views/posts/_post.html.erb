@@ -1,5 +1,5 @@
 <article class='post-container container', id='post-<%= post.id %>'>
-	<var class='rank'><%= post.rank %></var>
+	<var class='rank'><%= post.rank(:default) %></var>
 	<nav class='post-voting'>
 		<% if current_user %>
 			<%= link_to '▲', post_votes_path(post, value: '1'), id:"#{post.id}-up-vote", class: 'up-vote-link' %>

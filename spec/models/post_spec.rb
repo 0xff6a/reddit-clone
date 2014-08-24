@@ -69,26 +69,6 @@ RSpec.describe Post, :type => :model do
 
 	end
 
-	context '#rank' do
-
-		it 'should return 1 if there are no other posts' do
-			expect(sample_post.rank).to eq(1)
-		end
-
-		it 'should return 2 if post has lower vote-total than the other post' do
-			better_post = Post.create(title: 'Best', text: '....', user_id: user.id)
-			better_post.votes.create(value: 1, user_id: user.id)
-			expect(sample_post.rank).to eq(2)
-		end
-
-		it 'should return 1 if post has higher vote-total than the other post' do
-			worse_post = Post.create(title: 'Worse', text: '....', user_id: user.id)
-			sample_post.votes.create(value: 1, user_id: user.id)
-			expect(sample_post.rank).to eq(1)
-		end
-
-	end
-
 	context '#descendants_count' do
 
 		it 'should return 0 when there are no comments on a post' do

@@ -33,8 +33,4 @@ describe 'Post rankings:' do
 
 	end
 
-	def _one_hour_ago
-		Time.now - 60*60
-	end
-
 end
