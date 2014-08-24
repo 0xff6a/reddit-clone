@@ -13,11 +13,11 @@ describe 'Voting:' do
 	
 	context 'when there are posts' do
 
-		it 'a user can vote a post up' do
+		it 'a user can vote a post up', js: true do
 			visit root_path
 			link_id = "#{other_post.id}-vote"
 			click_link link_id
-			expect(page).to have_css('.vote-score', text: '1')
+			expect(page).to have_css('.vote-count', text: '1')
 		end
 
 		xit 'a user can vote a post down' do

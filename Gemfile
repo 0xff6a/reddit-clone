@@ -44,6 +44,8 @@ group :development, :test do
 	gem 'factory_girl_rails'
 	gem 'warden'
 	gem 'launchy'
+	gem 'poltergeist'
+	gem 'database_cleaner'
 end
 
 gem 'devise'
