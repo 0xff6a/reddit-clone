@@ -14,7 +14,11 @@ class Post < ActiveRecord::Base
 	end
 
 	def rank
-		Post.all.sort_by(&:vote_total).reverse.index(_post) + 1
+		Post.ranked_posts.index(_post) + 1
+	end
+
+	def self.ranked_posts
+		self.all.sort_by(&:vote_total).reverse
 	end
 
 	private
