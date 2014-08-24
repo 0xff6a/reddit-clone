@@ -16,12 +16,20 @@ class Comment < ActiveRecord::Base
 
 	def has_parent_post_or_comment
 		if parent_id.present? && post_id.present?
-			errors.add(:post_id, 'Your comment cannot reference both a post and a comment')
-			errors.add(:parent_id, 'Your comment cannot reference both a post and a comment')
+			_both_present_errorhandler
 		elsif !parent_id.present? && !post_id.present?
-			errors.add(:post_id, 'Your comment must reference a post or a comment')
-			errors.add(:parent_id, 'Your comment must reference a post or a comment')
+			_neither_present_errorhandler
 		end
+	end
+
+	def _both_present_errorhandler
+		errors.add(:post_id, 'Your comment cannot reference both a post and a comment')
+		errors.add(:parent_id, 'Your comment cannot reference both a post and a comment')
+	end
+
+	def _neither_present_errorhandler
+		errors.add(:post_id, 'Your comment must reference a post or a comment')
+		errors.add(:parent_id, 'Your comment must reference a post or a comment')
 	end
 
 	def _comment
