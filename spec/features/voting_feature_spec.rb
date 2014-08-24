@@ -39,4 +39,13 @@ describe 'Voting:' do
 
 	end
 
+	context 'more than once', js: true do
+
+		it 'the user will see an error message' do
+			2.times { vote_for(post, 'up') }
+			expect(page).to have_content('You can only vote on a post once')
+		end
+
+	end
+
 end

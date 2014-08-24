@@ -2,22 +2,24 @@ $(document).ready( function(){
 
 	$('.up-vote-link').on('click', function() {
 		event.preventDefault();
-		var voteCount = $(this).siblings('.vote-count');
-		
-		$.post(this.href, function(response){
-			voteCount.text(response.new_vote_count);
-		});
-
+		processVoteEvent(this.href, $(this).siblings('.vote-count'));
 	});
 
 	$('.down-vote-link').on('click', function() {
 		event.preventDefault();
-		var voteCount = $(this).siblings('.vote-count');
+		processVoteEvent(this.href, $(this).siblings('.vote-count'));
+	});
+
+	function processVoteEvent(post_url, voteCount) {
 		
-		$.post(this.href, function(response){
-			voteCount.text(response.new_vote_count);
+		$.post(post_url, function(response){
+			if( response.new_vote_count === 'error'){
+				location.reload();
+			} else {
+				voteCount.text(response.new_vote_count);
+			};
 		});
 
-	});
+	};
 
 });
