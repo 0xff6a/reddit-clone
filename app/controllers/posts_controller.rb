@@ -7,14 +7,17 @@ class PostsController < ApplicationController
 
 	def fresh
 		@algorithm = :fresh
-		@posts = Post.ranked_by_algorithm(@algorithm)
-		render 'index'
+		_display_page_for(@algorithm)
 	end
 
 	def controversial
 		@algorithm = :controversial
-		@posts = Post.ranked_by_algorithm(@algorithm)
-		render 'index'
+		_display_page_for(@algorithm)
+	end
+
+	def rising
+		@algorithm = :rising
+		_display_page_for(@algorithm)
 	end
 
 	def new
@@ -30,6 +33,11 @@ class PostsController < ApplicationController
 	def create
 		@post = _create_post(params[:post])
 		@post.save ? _process_valid_post : _post_errorhandler(@post)
+	end
+
+	def _display_page_for(algo)
+		@posts = Post.ranked_by_algorithm(algo)
+		render 'index'
 	end
 
 	def _create_post(data_hash)
