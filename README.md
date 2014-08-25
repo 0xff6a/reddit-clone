@@ -1,7 +1,7 @@
 Week 9 Challenge @ Makers Academy: Reddit Clone (SkimdIt)
 ========================================================
 
-Hosted on heroku @ ....
+Hosted on heroku @ http://morning-tundra-6356.herokuapp.com/
 
 Ruby Version
 ------------
