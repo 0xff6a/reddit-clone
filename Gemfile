@@ -48,7 +48,12 @@ group :development, :test do
 	gem 'database_cleaner'
 end
 
+group :production do
+	gem 'rails_12factor'
+end
+
 gem 'devise'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
+gem 'heroku_secrets', github: 'alexpeattie/heroku_secrets'
 
