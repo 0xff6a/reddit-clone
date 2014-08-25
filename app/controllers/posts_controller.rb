@@ -1,11 +1,13 @@
 class PostsController < ApplicationController
 
 	def index
-		@posts = Post.ranked_by_algorithm(:default)
+		@algorithm = :default
+		@posts = Post.ranked_by_algorithm(@algorithm)
 	end
 
 	def fresh
-		@posts = Post.ranked_by_algorithm(:fresh)
+		@algorithm = :fresh
+		@posts = Post.ranked_by_algorithm(@algorithm)
 		render 'index'
 	end
 
@@ -15,7 +17,7 @@ class PostsController < ApplicationController
 	end
 
 	def search
-		@posts = Post.where("title like ?", "%#{params[:query]}%").ranked_by_algorithm(:default)
+		@posts = Post.where("title like ?", "%#{params[:query]}%").ranked_by_algorithm(@algorithm)
 		render 'index'
 	end
 

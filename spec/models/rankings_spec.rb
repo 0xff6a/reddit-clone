@@ -56,7 +56,21 @@ describe 'Ranking Posts' do
 
 		context 'controversial algorithm' do
 
+			it 'should return 1 if the post has a greater absolute number of votes than the other post' do
+				controversial_post = Post.create(title: '?', text: '....', user_id: user.id, created_at: _one_hour_ago)
+				5.times { |n| controversial_post.votes.create(value: 1, user_id: n) }
+				5.times { |n| controversial_post.votes.create(value: -1, user_id: n + 4) }
+				expect(controversial_post.rank(:controversial)).to eq(1)
+				expect(sample_post.rank(:controversial)).to eq(2)
+			end
 
+			it 'should return 1 if the post a greater absolute number of votes and less upvotes than the other post' do
+				controversial_post = Post.create(title: '?', text: '....', user_id: user.id, created_at: _one_hour_ago)
+				1.times { |n| controversial_post.votes.create(value: 1, user_id: n) }
+				5.times { |n| controversial_post.votes.create(value: -1, user_id: n + 4) }
+				expect(controversial_post.rank(:controversial)).to eq(1)
+				expect(sample_post.rank(:controversial)).to eq(2)
+			end
 
 		end
 

@@ -26,8 +26,8 @@ class Post < ActiveRecord::Base
 			self.default_ranking
 		when :fresh
 			self.fresh_ranking
-		else
-			self.all
+		when :controversial
+			self.controversial_ranking
 		end
 	end
 
@@ -39,8 +39,18 @@ class Post < ActiveRecord::Base
 		self.all.sort_by(&:created_at).reverse
 	end
 
+	def self.controversial_ranking
+		self.all.sort_by(&:controversy).reverse
+	end
+
 	def hotness
 		s = _post.votes.sum(:value)
+		order = Math.log([s, 1].max, 10)
+		order + (_sign(s) * _age) / TIME_NORMALIZER
+	end
+
+	def controversy
+		s = _post.votes.count
 		order = Math.log([s, 1].max, 10)
 		order + (_sign(s) * _age) / TIME_NORMALIZER
 	end
