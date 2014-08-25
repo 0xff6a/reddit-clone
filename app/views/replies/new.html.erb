@@ -1,4 +1,6 @@
-<%= form_for @new_reply_comment, url: comment_replies_path(@comment) do |f| %>
-	<%= f.text_field :text, id: 'new_reply_text', placeholder: 'Response...' %>
-	<%= f.submit 'Save' %>
-<% end %>
+<section class='new-post-input container'>
+	<%= form_for @new_reply_comment, url: comment_replies_path(@comment) do |f| %>
+		<%= f.text_field :text, id: 'new_reply_text', class: 'form-control', placeholder: 'Response...' %><br />
+		<%= f.submit 'Save', class: 'btn btn-success btn-lg' %><br />
+	<% end %>
+</section>
