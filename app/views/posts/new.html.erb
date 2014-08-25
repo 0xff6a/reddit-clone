@@ -1,9 +1,11 @@
-<%= form_for @new_post do |f| %>
-	<%= f.text_field :title, id: 'new_post_title', placeholder: 'Title' %>
-	<% if @type == 'text' %>
-		<%= f.text_field :text, id: 'new_post_text', placeholder: 'Text....' %>
-	<% else %>
-		<%= f.text_field :url, id: 'new_post_url', placeholder: 'URL' %>
+<section class='new-post-input container'>
+	<%= form_for @new_post do |f| %>
+		<%= f.text_field :title, id: 'new_post_title', class: 'form-control', placeholder: 'Title' %><br />
+		<% if @type == 'text' %>
+			<%= f.text_field :text, id: 'new_post_text',  class: 'form-control',placeholder: 'Text....' %><br />
+		<% else %>
+			<%= f.text_field :url, id: 'new_post_url', class: 'form-control', placeholder: 'URL' %><br />
+		<% end %>
+		<%= f.submit 'Post', class: 'btn btn-success btn-lg' %>
 	<% end %>
-	<%= f.submit 'Post' %>
-<% end %>
+</section>

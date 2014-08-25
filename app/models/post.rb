@@ -17,10 +17,6 @@ class Post < ActiveRecord::Base
 		Post.ranked_by_algorithm(algorithm).index(_post) + 1
 	end
 
-	# def self.ranked_posts
-	# 	self.all.sort_by(&:vote_total).reverse
-	# end
-
 	def self.ranked_by_algorithm(algorithm)
 		case algorithm
 		when :default

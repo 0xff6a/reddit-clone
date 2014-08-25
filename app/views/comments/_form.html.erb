@@ -1,4 +1,10 @@
 <%= form_for [@post, @new_comment] do |f| %>
-	<%= f.text_field :text, id: 'new_comment_text', placeholder: 'Comments...' %>
-	<%= f.submit 'Save' %>
+	<div class="row">
+	    <div class="input-group">
+	      <span class="input-group-btn">
+	      	<%= f.submit 'Save', class: 'btn btn-success' %>
+	      </span>
+	      <%= f.text_field :text, id: 'new_comment_text', class: 'form-control', placeholder: 'Comments...' %>
+	    </div><!-- /input-group -->
+	</div><!-- /.row -->
 <% end %>
