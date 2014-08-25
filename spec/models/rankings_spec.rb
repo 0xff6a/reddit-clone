@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe 'Ranking Posts' do
 
 	let(:user) 				{ create(:test_user) 																						}
@@ -26,6 +28,7 @@ describe 'Ranking Posts' do
 			it 'should return 1 if the post has a lower vote total, but is much newer' do
 				old_post = Post.create(created_at: 2.days.ago, title: 'Old', text: '....', user_id: user.id)
 				10.times { |n| old_post.votes.create(value: 1, user_id: n) }
+				sample_post.votes.create(value: 1, user_id: 1)
 				expect(sample_post.rank(:default)).to eq(1)
 			end
 

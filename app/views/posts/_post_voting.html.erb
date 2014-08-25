@@ -1,9 +1,9 @@
 <% if current_user %>
 	<%= link_to '▲', post_votes_path(post, value: '1'), id:"#{post.id}-up-vote", class: 'up-vote-link' %>
-	<var class='vote-count'><%= post.vote_total %></var>
+	<var class='vote-count'> <%= post.vote_total %></var>
 	<%= link_to '▼', post_votes_path(post, value: '-1'), id:"#{post.id}-down-vote", class: 'down-vote-link' %>
 <% else %>
 	<span>▲</span>
-	<var class='vote-count'><%= post.vote_total %></var>
+	<var class='vote-count'> <%= post.vote_total %></var>
 	<span>▼</span>
 <% end %>

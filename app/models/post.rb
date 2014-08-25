@@ -29,11 +29,17 @@ class Post < ActiveRecord::Base
 	end
 
 	def self.default_ranking
-		self.all.sort_by(&:vote_total).reverse
+		self.all.sort_by(&:hotness).reverse
 	end
 
 	def self.fresh_ranking
 		self.all.sort_by(&:created_at).reverse
+	end
+
+	def hotness
+		s = _post.votes.sum(:value)
+		order = Math.log([s, 1].max, 10)
+		order + (_sign(s) * _age) / 45000
 	end
 
 	def descendants_count
@@ -57,6 +63,17 @@ class Post < ActiveRecord::Base
 
 	def _post
 		self
+	end
+
+	def _sign(integer)
+	  return 1 if integer > 0 
+	  return -1 if integer < 0
+	  0
+	end
+
+	def _age
+		epoch = Time.new(2005, 12, 8)
+		(_post.created_at - epoch) 
 	end
 
 end
