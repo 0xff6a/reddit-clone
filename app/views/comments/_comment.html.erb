@@ -1,25 +1,27 @@
-<section class='thread-container container'>
-	<article class='comment-container container'>
-		<header class='comment-header'>
-			Insert user name here
-		</header>
-		<section class='comment-body'>
-			<p class='comment-text'>
-				<%= comment.text %>
-			</p>
-		</section>
-		<footer>
-			<nav class='post-nav'>
-				<%= link_to 'Reply', new_comment_reply_path(comment) %>
-			</nav>
-		</footer>
-	</article>
-	<article class='reply-container container'>
-		<% if comment.replies.any? %>
-			<span class='child-delimiter'>↪</span>
-			<% comment.replies.each do |comment| %>
-				<%= render comment %>
-			<% end %> 
-		<% end %>
-	</article>
-</section>
+<div class='wrapper'>
+	<section class="panel panel-info container">
+		<article class='comment-container container'>
+			<header class='comment-header'>
+				<em><%= comment_owner(comment) %>, about <%=time_ago_in_words(comment.created_at)%> ago</em>
+			</header>
+			<section class='comment-body'>
+				<div class='well well-sm'>
+					<%= comment.text %>
+				</div>
+			</section>
+			<footer>
+				<nav class='post-nav'>
+					<%= link_to 'Reply', new_comment_reply_path(comment) %>
+				</nav>
+			</footer>
+		</article>
+		<article class='reply-container container'>
+			<% if comment.replies.any? %>
+				<span class='child-delimiter'>↪</span>
+				<% comment.replies.each do |comment| %>
+					<%= render comment %>
+				<% end %> 
+			<% end %>
+		</article>
+	</section>
+</div>

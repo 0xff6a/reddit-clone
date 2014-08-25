@@ -1,3 +1,18 @@
 // Place all the styles related to the comments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.comment-container {
+	max-width: 95%;
+	float: left;
+	overflow: hidden;
+
+	.comment-header{
+		color: #31708f;
+	}
+}
+
+.reply-container {
+	max-width: 95%;
+	float: left;
+}
+
