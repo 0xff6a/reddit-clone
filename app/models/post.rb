@@ -1,5 +1,8 @@
 class Post < ActiveRecord::Base
 
+	EPOCH = Time.new(2005, 12, 8)
+	TIME_NORMALIZER = 45000
+
 	belongs_to 	:user
 	has_many 		:comments, dependent: :destroy
 	has_many 		:votes, dependent: :destroy
@@ -39,7 +42,7 @@ class Post < ActiveRecord::Base
 	def hotness
 		s = _post.votes.sum(:value)
 		order = Math.log([s, 1].max, 10)
-		order + (_sign(s) * _age) / 45000
+		order + (_sign(s) * _age) / TIME_NORMALIZER
 	end
 
 	def descendants_count
@@ -72,8 +75,7 @@ class Post < ActiveRecord::Base
 	end
 
 	def _age
-		epoch = Time.new(2005, 12, 8)
-		(_post.created_at - epoch) 
+		_post.created_at - EPOCH
 	end
 
 end
