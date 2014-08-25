@@ -1,10 +1,10 @@
 <article class="panel panel-info", id='post-<%= post.id %>'>
 	<header class="panel-heading">
+		<var class='rank'><%= post.rank(:default) %>. </var>
 		<strong><%= post.title %></strong>
 			<em class='post-metadata'>Posted by <%= post_owner(post) %> <%=time_ago_in_words(post.created_at)%> ago</em>
 	</header>
-	<aside class='post-rank'>	
-		<var class='rank'><%= post.rank(:default) %></var>
+	<aside class='post-vote'>	
 		<nav class='post-voting'>
 			<%= render partial:'posts/post_voting', locals: { post: post } %>
 		</nav>

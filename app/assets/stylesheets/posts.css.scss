@@ -12,7 +12,7 @@
 	margin-left: 10%;
 }
 
-.post-rank {
+.post-vote {
 	float: left;
 	display: inline-block;
 }
@@ -20,8 +20,10 @@
 .post-voting {
 
 	display: inline-block;
+	margin-left: 10px;
+	margin-top: 10px;
 
-	a {
+	a, span {
 		display: flex;
 	}
 }
@@ -68,6 +70,12 @@
 .new-post-input {
 	width: 85% !important;
 	margin: 0 auto;
+}
+
+.rank {
+	font-weight: bold;
+	font-size: 25px;
+	line-height: 0.75;
 }
 
 
