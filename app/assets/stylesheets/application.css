@@ -19,3 +19,7 @@
 main {
 	overflow: hidden;
 }
+
+.navbar-brand {
+	font-size: 25px;
+}
