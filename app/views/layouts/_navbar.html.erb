@@ -28,12 +28,12 @@
           </li>
         <% end %>
       </ul>
-      <form class="navbar-form navbar-left" role="search">
+      <%= form_tag "/posts/search", method: "get", class: "navbar-form navbar-left" do %>
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          <%= text_field_tag 'query', nil, class: "form-control", placeholder:"Search"%>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
+        <%= submit_tag 'Find', class: "btn btn-default" %>
+      <% end %>
       <% if current_user %>
       	<p class="navbar-text navbar-left">Welcome <%= current_user.email %></p>
       <% end %>

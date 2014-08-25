@@ -54,6 +54,14 @@ describe 'Posting:' do
 			end
 		end
 
+		it 'should allow a user to search the site by title content' do
+			create(:test_post, title: 'interesting')
+			create(:test_post, title: 'boring')
+			_search_for('interesting')
+			expect(page).to have_content('interesting')
+			expect(page).not_to have_content('boring')
+		end
+
 	end
 
 	context 'ensuring valid posts' do

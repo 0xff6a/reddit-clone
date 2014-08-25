@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     collection do
       get 'fresh'
       get 'rising'
+      get 'controversial'
+      get 'search'
     end
   end
 

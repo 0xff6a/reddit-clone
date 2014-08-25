@@ -50,3 +50,9 @@ def _reply_to_comment_with(text)
 	fill_in 'new_reply_text', with: text
 	click_on 'Save'
 end
+
+def _search_for(text)
+	visit posts_path
+	fill_in 'Search', with: text
+	click_on 'Find'
+end

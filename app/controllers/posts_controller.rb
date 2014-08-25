@@ -14,6 +14,11 @@ class PostsController < ApplicationController
 		@new_post = Post.new()
 	end
 
+	def search
+		@posts = Post.where("title like ?", "%#{params[:query]}%")
+		render 'index'
+	end
+
 	def create
 		@post = _create_post(params[:post])
 		@post.save ? _process_valid_post : _post_errorhandler(@post)
