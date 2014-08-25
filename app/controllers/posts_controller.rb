@@ -23,7 +23,7 @@ class PostsController < ApplicationController
 	end
 
 	def search
-		@posts = Post.where("title like ?", "%#{params[:query]}%").ranked_by_algorithm(@algorithm)
+		@posts = Post.where("lower(title) like ?", "%#{params[:query].downcase}%").ranked_by_algorithm(@algorithm)
 		render 'index'
 	end
 

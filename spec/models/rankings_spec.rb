@@ -82,6 +82,12 @@ describe 'Ranking Posts' do
 
 		end
 
+		context 'rising algorithm' do
+
+			
+			
+		end
+
 	end
 
 end
