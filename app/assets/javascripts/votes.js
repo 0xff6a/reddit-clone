@@ -10,8 +10,7 @@ $(document).ready( function(){
 		processVoteEvent(this.href, $(this).siblings('.vote-count'));
 	});
 
-	function processVoteEvent(url, voteCount) {
-		
+	function processVoteEvent(url, voteCount) {	
 		$.post(url, function(response){
 			if( response.new_vote_count === 'error'){
 				location.reload();
@@ -19,7 +18,6 @@ $(document).ready( function(){
 				voteCount.text(response.new_vote_count);
 			};
 		});
-
 	};
 
 });

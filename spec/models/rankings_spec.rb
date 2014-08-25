@@ -84,8 +84,27 @@ describe 'Ranking Posts' do
 
 		context 'rising algorithm' do
 
-			
-			
+			it 'should display no links more than 12 hours old' do
+				expired_post = Post.create(title: '?', text: '....', user_id: user.id, created_at: 1.days.ago)
+				expect(Post.ranked_by_algorithm(:rising)).not_to include(expired_post)
+			end
+
+			it 'should rank links by the ratio of upvotes to votes' do
+				rising_post = Post.create(title: 'Up', text: '....', user_id: user.id)
+				_up_vote_n_times_for(rising_post, 2)
+				_up_vote_n_times_for(sample_post,6)
+				_down_vote_n_times_for(sample_post,4, 6)
+				expect(rising_post.rank(:rising)).to eq(1)
+			end
+
+			it 'should not incorporate a time weighting' do
+				rising_post = Post.create(title: 'Up', text: '....', user_id: user.id, created_at: _six_hours_ago)
+				_up_vote_n_times_for(rising_post, 2)
+				_up_vote_n_times_for(sample_post,6)
+				_down_vote_n_times_for(sample_post,4, 6)
+				expect(rising_post.rank(:rising)).to eq(1)
+			end
+
 		end
 
 	end

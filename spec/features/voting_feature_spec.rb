@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe 'Voting:' do
 
-	let(:post) 				{ create(:test_post) }
-	let(:other_post)	{ create(:test_post, title: 'better post') }
+	let(:post) 				{ create(:test_post) 												}
+	let(:other_post)	{ create(:test_post, title: 'better post') 	}
 
 	before(:each) do
 		_create_and_login_test_user

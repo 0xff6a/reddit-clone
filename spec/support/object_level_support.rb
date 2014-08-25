@@ -4,11 +4,19 @@ def _create_and_login_test_user
 end
 
 def _one_hour_ago
-	Time.now - 60*60
+	_n_hour_diff(-1)
+end
+
+def _six_hours_ago
+	_n_hour_diff(-6)
 end
 
 def _one_hour_ahead
-	Time.now + 60*60
+	_n_hour_diff(1)
+end
+
+def _n_hour_diff(n)
+	Time.now + n*60*60
 end
 
 def _up_vote_n_times_for(post, n, start_user_id=0)
@@ -20,5 +28,5 @@ def _down_vote_n_times_for(post, n, start_user_id=0)
 end
 
 def _generate_n_votes_for(post, n, value, start_user_id)
-	n.times { |i| post.votes.create(value: value, user_id: start_user_id) }
+	n.times { |i| post.votes.create(value: value, user_id: start_user_id + i) }
 end

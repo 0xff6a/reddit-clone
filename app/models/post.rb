@@ -28,6 +28,8 @@ class Post < ActiveRecord::Base
 			self.fresh_ranking
 		when :controversial
 			self.controversial_ranking
+		when :rising
+			self.rising_ranking
 		end
 	end
 
@@ -36,11 +38,15 @@ class Post < ActiveRecord::Base
 	end
 
 	def self.fresh_ranking
-		self.all.sort_by(&:created_at).reverse
+		self.all.sort_by(&:freshness).reverse
 	end
 
 	def self.controversial_ranking
 		self.all.sort_by(&:controversy).reverse
+	end
+
+	def self.rising_ranking
+		self.all.reject(&:expired_for_rising?).sort_by(&:momentum).reverse
 	end
 
 	def hotness
@@ -49,10 +55,22 @@ class Post < ActiveRecord::Base
 		order + (_sign(s) * _age) / TIME_NORMALIZER
 	end
 
+	def freshness
+		created_at
+	end
+
 	def controversy
 		s = _post.votes.count + _post.descendants_count
 		order = Math.log([s, 1].max, 10)
 		order + 0.2 * (_sign(s) * _age) / TIME_NORMALIZER
+	end
+
+	def momentum
+		(_up_votes + 1).to_f / ( _post.votes.count + 1 )
+	end
+
+	def expired_for_rising?
+		created_at < 12.hours.ago
 	end
 
 	def descendants_count
@@ -86,6 +104,10 @@ class Post < ActiveRecord::Base
 
 	def _age
 		_post.created_at - EPOCH
+	end
+
+	def _up_votes
+		_post.votes.where(value: 1).count
 	end
 
 end
