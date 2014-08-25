@@ -58,18 +58,26 @@ describe 'Ranking Posts' do
 
 			it 'should return 1 if the post has a greater absolute number of votes than the other post' do
 				controversial_post = Post.create(title: '?', text: '....', user_id: user.id, created_at: _one_hour_ago)
-				5.times { |n| controversial_post.votes.create(value: 1, user_id: n) }
-				5.times { |n| controversial_post.votes.create(value: -1, user_id: n + 4) }
+				_up_vote_n_times_for(controversial_post,5)
+				_down_vote_n_times_for(controversial_post, 5, 4)
 				expect(controversial_post.rank(:controversial)).to eq(1)
 				expect(sample_post.rank(:controversial)).to eq(2)
 			end
 
 			it 'should return 1 if the post a greater absolute number of votes and less upvotes than the other post' do
 				controversial_post = Post.create(title: '?', text: '....', user_id: user.id, created_at: _one_hour_ago)
-				1.times { |n| controversial_post.votes.create(value: 1, user_id: n) }
-				5.times { |n| controversial_post.votes.create(value: -1, user_id: n + 4) }
+				_up_vote_n_times_for(controversial_post,1)
+				_down_vote_n_times_for(controversial_post, 5, 4)
 				expect(controversial_post.rank(:controversial)).to eq(1)
 				expect(sample_post.rank(:controversial)).to eq(2)
+			end
+
+			it 'should return 1 the post has same absolute votes, but more comments than another' do
+				controversial_post = Post.create(title: '?', text: '....', user_id: user.id)
+				_up_vote_n_times_for(sample_post,1)
+				controversial_post.comments.create(text: 'blah', post_id: controversial_post.id, user_id: user.id)
+				controversial_post.comments.create(text: 'blah blah', post_id: controversial_post.id, user_id: user.id)
+				expect(controversial_post.rank(:controversial)).to eq(1)
 			end
 
 		end
