@@ -11,6 +11,12 @@ class PostsController < ApplicationController
 		render 'index'
 	end
 
+	def controversial
+		@algorithm = :controversial
+		@posts = Post.ranked_by_algorithm(@algorithm)
+		render 'index'
+	end
+
 	def new
 		@type = params[:type]
 		@new_post = Post.new()

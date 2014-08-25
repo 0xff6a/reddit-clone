@@ -50,7 +50,7 @@ class Post < ActiveRecord::Base
 	end
 
 	def controversy
-		s = _post.votes.count
+		s = _post.votes.count + _post.descendants_count
 		order = Math.log([s, 1].max, 10)
 		order + (_sign(s) * _age) / TIME_NORMALIZER
 	end
