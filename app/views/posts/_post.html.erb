@@ -9,12 +9,22 @@
 			<%= render partial:'posts/post_voting', locals: { post: post } %>
 		</nav>
 	</aside>
-	<a class="media-link" href="#">
-	  <img class="media-object" src="http://i.imgur.com/JJ3TOHT.gif" alt="...">
-	</a>
+	<% if post.url.present? %>
+		<a class="media-link" href="<%= post.url %>">
+		  <img class="media-object" src="<%= post.url %>">
+		</a>
+	<% else %>
+	 <a class="media-link" href="<%= post.url %>">
+	   <img class="media-object" src="http://giladlotan.com/wp-content/uploads/2011/01/wordle22.jpg">
+	 </a>
+	<% end %>
 	<section class="panel-body post-body">
 		<div class="well well-sm">
-			<p class='post-text'><%= post.text %></p>
+			<% if post.text.present? %>
+				<%= post.text %>
+			<% else %>
+				<a class='post-url'><%= post.url %></a>
+			<% end %>
 		</div>
 	</section>
 	<footer class="panel-footer">

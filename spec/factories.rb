@@ -6,6 +6,12 @@ FactoryGirl.define do
     user_id 1
   end
 
+  factory :link_post, class: Post do
+    title     'imagey'
+    url       'http://i.imgur.com/JJ3TOHT.gif'
+    user_id   1
+  end
+
   factory :test_user, class: User do
     email                 'test@test.com'
     password              '12345678'

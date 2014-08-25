@@ -30,13 +30,28 @@ describe 'Posting:' do
 
 	context 'when there are posts' do
 
-		before(:each) { create(:test_post) }
-
 		it 'should display them on the homepage' do
+			create(:test_post)
 			visit posts_path
 			expect(page).not_to have_content('No posts yet')
 			within('.panel-heading') { expect(page).to have_content('text post') }
 			within('.post-body') { expect(page).to have_content('waffle waffle') }
+		end
+
+		it 'should display a link thumbnail next to url posts' do
+			create(:link_post, url: 'http://i.imgur.com/JJ3TOHT.gif')
+			visit posts_path
+			within('.panel-info') do
+			 expect(page.find('img')['src']).to have_content 'http://i.imgur.com/JJ3TOHT.gif'
+			end
+		end
+
+		it 'should display a standard thumb next to text posts' do
+			create(:test_post)
+			visit posts_path
+			within('.panel-info') do
+			 expect(page.find('img')['src']).to have_content 'http://giladlotan.com/wp-content/uploads/2011/01/wordle22.jpg'
+			end
 		end
 
 	end
