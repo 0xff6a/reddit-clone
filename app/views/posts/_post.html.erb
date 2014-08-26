@@ -11,7 +11,7 @@
 	</aside>
 	<% if post.url.present? %>
 		<a class="media-link" href="<%= post.url %>">
-		  <img class="media-object" src="<%= post.url %>">
+		  <img class="media-object" src="<%= post.url %>" alt="<%= post.title %>">
 		</a>
 	<% else %>
 	 <a class="media-link" href="<%= post.url %>">

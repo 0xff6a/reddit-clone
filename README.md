@@ -16,8 +16,7 @@ Create a clone of reddit including posting of links or text, comments, voting on
 Technologies used:
 ------------------
 - Ruby on Rails
-- Javascript
-- jQuery & jQuery UI
+- Javascript & jQuery
 - RSpec & Capybara for testing ruby components
 - Poltergeist/Phantom JS for testing JavaScript components
 - Bootstrap for styling & modals
@@ -43,7 +42,7 @@ Ranking Algorithms:
 
 Notes:
 ------
-- User management uses devise gem
+- Used recursive functionality to trace a reply back to its parent post, allowing for infinitely nested replies
 
 Running the application:
 ------------------------

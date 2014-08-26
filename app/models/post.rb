@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
 
 	EPOCH = Time.new(2005, 12, 8)
 	TIME_NORMALIZER = 45000
+	SOFT_TIME_WEIGHT = 0.2
 
 	belongs_to 	:user
 	has_many 		:comments, dependent: :destroy
@@ -62,7 +63,7 @@ class Post < ActiveRecord::Base
 	def controversy
 		s = _post.votes.count + _post.descendants_count
 		order = Math.log([s, 1].max, 10)
-		order + 0.2 * (_sign(s) * _age) / TIME_NORMALIZER
+		order + SOFT_TIME_WEIGHT * (_sign(s) * _age) / TIME_NORMALIZER
 	end
 
 	def momentum
